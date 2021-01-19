@@ -8,8 +8,9 @@ Created on Mon Jan 18 10:09:51 2021
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-import datetime
+from RuuviAnalysis.ImportRV import read__rv_input_data
 
+inputFile = "Data.csv"
 dropColumns = ["name", 
                "accelerationAngleFromX", 
                "accelerationAngleFromY", 
@@ -20,18 +21,9 @@ dropColumns = ["name",
                "accelerationZ", 
                "dataFormat"]
 
-#Read data in csv format
-RvData = pd.read_csv("Data.csv")
 
-#Remove data not used in this analysis. As the sensors are stationary in this setup, acceleration information will not change
-RvData = RvData.drop(dropColumns, axis=1)
-
-#Convert time column in to datetime format
-RvData["time"] = pd.to_datetime(RvData["time"], errors='coerce')
-
-
-#Split data by each of the three sensors
-rv1, rv2, rv3 = [x for _, x in RvData.groupby(RvData['mac'])]
+#Call function from library to prepare the data
+rv1, rv2, rv3 = read__rv_input_data(inputFile, dropColumns)
 
 
 
@@ -55,24 +47,41 @@ ax4.plot(rv2["time"], rv2["dewPoint"])
 ax4.plot(rv3["time"], rv3["dewPoint"])
 
 #Format plot
-xfmt = mdates.DateFormatter('%d-%m-%y %H:%M')
+xfmt = mdates.DateFormatter('%d-%m %H:%M')
 
 plt.setp(ax1.xaxis.get_majorticklabels(), rotation=45)
 plt.setp(ax2.xaxis.get_majorticklabels(), rotation=45)
 plt.setp(ax3.xaxis.get_majorticklabels(), rotation=45)
 plt.setp(ax4.xaxis.get_majorticklabels(), rotation=45)
 
+ax1.tick_params(labelsize=7)
+ax2.tick_params(labelsize=7)
+ax3.tick_params(labelsize=7)
+ax4.tick_params(labelsize=7)
 
 ax1.set_title("Humidity")
 ax2.set_title("Temperature")
 ax3.set_title("Pressure")
 ax4.set_title("DewPoint")
 
+ax1.set(xlabel="Time(M/D/H:m)", ylabel="Humidity (%)")
+ax2.set(xlabel="Time(M/D/H:m)", ylabel="Temperature (C)")
+ax3.set(xlabel="Time(M/D/H:m)", ylabel="Pressure (Pa)")
+ax4.set(xlabel="Time(M/D/H:m)", ylabel="Dew point (C)")
+
 ax1.xaxis.set_major_formatter(xfmt)
 ax2.xaxis.set_major_formatter(xfmt)
 ax3.xaxis.set_major_formatter(xfmt)
 ax4.xaxis.set_major_formatter(xfmt)
 
+ax1.grid()
+ax2.grid()
+ax3.grid()
+ax4.grid()
+
 plt.tight_layout()
 
 plt.show()
+
+fig.set_size_inches(18.5, 10.5)
+fig.savefig('Plots/ReadDataDemo.png', dpi=100)
