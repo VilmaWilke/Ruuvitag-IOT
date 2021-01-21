@@ -30,24 +30,29 @@ rv1, rv2, rv3 = read__rv_input_data(inputFile, dropColumns)
 #Matplotlib
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
 
-ax1.plot(rv1["time"], rv1["humidity"])
-ax1.plot(rv2["time"], rv2["humidity"])
-ax1.plot(rv3["time"], rv3["humidity"])
+ax1.plot(rv1["humidity"], label="Sensor 1")
+ax1.plot(rv2["humidity"], label="Sensor 2")
+ax1.plot(rv3["humidity"], label="Sensor 3")
 
-ax2.plot(rv1["time"], rv1["temperature"])
-ax2.plot(rv2["time"], rv2["temperature"])
-ax2.plot(rv3["time"], rv3["temperature"])
+ax2.plot(rv1["temperature"], label="Sensor 1")
+ax2.plot(rv2["temperature"], label="Sensor 2")
+ax2.plot(rv3["temperature"], label="Sensor 3")
 
-ax3.plot(rv1["time"], rv1["pressure"])
-ax3.plot(rv2["time"], rv2["pressure"])
-ax3.plot(rv3["time"], rv3["pressure"])
+ax3.plot(rv1["pressure"], label="Sensor 1")
+ax3.plot(rv2["pressure"], label="Sensor 2")
+ax3.plot(rv3["pressure"], label="Sensor 3")
 
-ax4.plot(rv1["time"], rv1["dewPoint"])
-ax4.plot(rv2["time"], rv2["dewPoint"])
-ax4.plot(rv3["time"], rv3["dewPoint"])
+ax4.plot(rv1["dewPoint"], label="Sensor 1")
+ax4.plot(rv2["dewPoint"], label="Sensor 2")
+ax4.plot(rv3["dewPoint"], label="Sensor 3")
 
 #Format plot
 xfmt = mdates.DateFormatter('%d-%m %H:%M')
+
+ax1.legend(loc= 'upper left', fontsize= 'small', bbox_to_anchor=(1.1, 1))
+ax2.legend(loc= 'upper left', fontsize= 'small', bbox_to_anchor=(1.1, 1))
+ax3.legend(loc= 'upper left', fontsize= 'small', bbox_to_anchor=(1.1, 1))
+ax4.legend(loc= 'upper left', fontsize= 'small', bbox_to_anchor=(1.1, 1))
 
 plt.setp(ax1.xaxis.get_majorticklabels(), rotation=45)
 plt.setp(ax2.xaxis.get_majorticklabels(), rotation=45)

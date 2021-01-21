@@ -10,6 +10,8 @@ import datetime
 
 
 def read__rv_input_data(inputFile, dropColumns):
+    """Returns prepared data from csv format"""
+    
     #Read data in csv format
     RvData = pd.read_csv(inputFile)
     
@@ -19,5 +21,9 @@ def read__rv_input_data(inputFile, dropColumns):
     #Convert time column in to datetime format
     RvData["time"] = pd.to_datetime(RvData["time"], errors='coerce')
     
+    #Set datetime as index
+    RvData.set_index("time", inplace=True)
+    
     #Split data by each of the sensors, then return
     return ([x for _, x in RvData.groupby(RvData['mac'])])
+

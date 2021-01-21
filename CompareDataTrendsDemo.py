@@ -30,22 +30,22 @@ fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
 
 #Compare data on two different axes, but display the lines in the same legend
 ax12 = ax1.twinx()
-a, = ax1.plot(rv1["time"], rv1["humidity"], color='blue', label="Humidity")
-b, = ax12.plot(rv1["time"], rv1["pressure"], color='orange', label="Pressure")
+a, = ax1.plot(rv1["humidity"], color='blue', label="Humidity")
+b, = ax12.plot(rv1["pressure"], color='orange', label="Pressure")
 p = [a, b]
 ax1.legend(p, [p_.get_label() for p_ in p],
            loc= 'upper left', fontsize= 'small', bbox_to_anchor=(1.1, 1))
 
 ax22 = ax2.twinx()
-a, = ax2.plot(rv1["time"], rv1["temperature"], color='green', label="Temperature")
-b, = ax22.plot(rv1["time"], rv1["dewPoint"], color='red', label="Dew Point")
+a, = ax2.plot(rv1["temperature"], color='green', label="Temperature")
+b, = ax22.plot(rv1["dewPoint"], color='red', label="Dew Point")
 p = [a, b]
 ax2.legend(p, [p_.get_label() for p_ in p],
            loc= 'upper left', fontsize= 'small', bbox_to_anchor=(1.1, 1))
 
 ax32 = ax3.twinx()
-a, = ax3.plot(rv1["time"], rv1["airDensity"], color='cyan', label="Air Density")
-b, = ax32.plot(rv1["time"], rv1["absoluteHumidity"], color='purple', label="Absolute Humidity")
+a, = ax3.plot(rv1["airDensity"], color='cyan', label="Air Density")
+b, = ax32.plot(rv1["absoluteHumidity"], color='purple', label="Absolute Humidity")
 p = [a, b]
 ax3.legend(p, [p_.get_label() for p_ in p],
            loc= 'upper left', fontsize= 'small', bbox_to_anchor=(1.1, 1))
