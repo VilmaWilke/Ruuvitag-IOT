@@ -1,2 +1,5 @@
 # Ruuvitag-IOT
-Script to connect Ruuvitag device to Azure using python on Raspberry Pi
+Scripts to connect Ruuvitag device to Azure using python on Raspberry Pi, as well as plot and analyse the data
+
+
+
