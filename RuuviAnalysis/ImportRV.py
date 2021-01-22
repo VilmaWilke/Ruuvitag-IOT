@@ -6,11 +6,12 @@ Created on Mon Jan 18 10:09:51 2021
 """
 
 import pandas as pd
+import numpy as np
 import datetime
 
 
 def read__rv_input_data(inputFile, dropColumns):
-    """Returns prepared data from csv format"""
+    """Returns prepared data from csv format"""  
     
     #Read data in csv format
     RvData = pd.read_csv(inputFile)
@@ -19,7 +20,7 @@ def read__rv_input_data(inputFile, dropColumns):
     RvData = RvData.drop(dropColumns, axis=1)
     
     #Convert time column in to datetime format
-    RvData["time"] = pd.to_datetime(RvData["time"], errors='coerce')
+    RvData["time"] = pd.to_datetime(RvData["time"], errors='raise')
     
     #Set datetime as index
     RvData.set_index("time", inplace=True)

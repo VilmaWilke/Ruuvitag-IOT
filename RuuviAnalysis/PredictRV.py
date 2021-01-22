@@ -43,4 +43,26 @@ def get_daily_max(rv):
         df = df.append(tmp, ignore_index=True)
         
     return df
+
+def get_hour_data(rv, hour):
+    """Returns all data that occurs at a given hour"""
+    
+    #Make sure new dataframe is empty
+    df = pd.DataFrame()   
+    
+    tmp = rv.loc[rv.index.strftime("%H") == "{0:0=2d}".format(hour)]
+    df = df.append(tmp)
+        
+    return df
+
+def get_day_data(rv, day):
+    """Returns all data that occurs at a given day"""
+    
+    #Make sure new dataframe is empty
+    df = pd.DataFrame()   
+    
+    tmp = rv.loc[rv.index.strftime("%d") == "{0:0=2d}".format(day)]
+    df = df.append(tmp)
+        
+    return df
     
